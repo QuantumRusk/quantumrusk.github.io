@@ -727,7 +727,7 @@
         }
     </style>
 </head>
-<body data-theme="light">
+<body data-theme="dark">
     <!-- Navigation -->
     <nav>
         <div class="container">
@@ -993,7 +993,7 @@
 
         // Check saved theme preference on page load
         window.addEventListener('load', function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
+            const savedTheme = localStorage.getItem('theme') || 'dark';
             document.documentElement.setAttribute('data-theme', savedTheme);
             
             const button = document.querySelector('.theme-toggle');
