@@ -13,14 +13,29 @@
         }
 
         :root {
-            --primary: #0a0e27;
-            --accent: #6366f1;
-            --accent-light: #818cf8;
-            --text-primary: #0a0e27;
-            --text-secondary: #6b7280;
-            --bg-light: #f9fafb;
-            --border: #e5e7eb;
-            --success: #10b981;
+            --primary: #0f172a;
+            --primary-light: #1e293b;
+            --secondary: #059669;
+            --secondary-light: #10b981;
+            --accent: #fbbf24;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+            --white: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            --primary: #0f172a;
+            --primary-light: #1e293b;
+            --secondary: #10b981;
+            --secondary-light: #34d399;
+            --accent: #fbbf24;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --bg-light: #1e293b;
+            --border: #334155;
+            --white: #0f172a;
         }
 
         html {
@@ -30,9 +45,14 @@
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-primary);
-            background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+            background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background 0.3s ease;
+        }
+
+        [data-theme="dark"] body {
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f35 100%);
         }
 
         /* Navigation */
@@ -45,6 +65,11 @@
             z-index: 1000;
             border-bottom: 1px solid var(--border);
             padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] nav {
+            background: rgba(15, 23, 42, 0.95);
         }
 
         nav .container {
@@ -59,10 +84,16 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
         nav ul {
@@ -81,7 +112,7 @@
         }
 
         nav a:hover {
-            color: var(--accent);
+            color: var(--secondary);
         }
 
         nav a::after {
@@ -91,7 +122,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--accent);
+            background: var(--secondary);
             transition: width 0.3s ease;
         }
 
@@ -99,12 +130,32 @@
             width: 100%;
         }
 
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            background: var(--accent);
+            border: none;
+            width: 50px;
+            height: 28px;
+            border-radius: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
         @media (max-width: 768px) {
             nav ul {
-                gap: 1rem;
+                display: none;
             }
-            nav a {
-                font-size: 0.85rem;
+            .nav-controls {
+                gap: 1rem;
             }
         }
 
@@ -125,7 +176,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 3.5rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--text-primary);
             margin-bottom: 1rem;
             line-height: 1.2;
         }
@@ -162,7 +213,7 @@
         .meta-value {
             font-size: 1.1rem;
             font-weight: 600;
-            color: var(--primary);
+            color: var(--text-primary);
         }
 
         .cta-buttons {
@@ -185,24 +236,24 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
         }
 
         .btn-secondary {
-            border: 2px solid var(--accent);
-            color: var(--accent);
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
             background: transparent;
         }
 
         .btn-secondary:hover {
-            background: var(--accent);
+            background: var(--secondary);
             color: white;
         }
 
@@ -227,7 +278,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--text-primary);
             margin-bottom: 3rem;
             text-align: center;
             position: relative;
@@ -243,20 +294,25 @@
             transform: translateX(-50%);
             width: 60px;
             height: 4px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
             border-radius: 2px;
         }
 
         /* Education */
         .education-item {
-            background: white;
+            background: var(--white);
             padding: 2rem;
             border-radius: 8px;
             margin-bottom: 1.5rem;
-            border-left: 4px solid var(--accent);
+            border-left: 4px solid var(--secondary);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             animation: slideInLeft 0.6s ease;
+        }
+
+        [data-theme="dark"] .education-item {
+            background: var(--primary-light);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .education-item:hover {
@@ -266,12 +322,12 @@
 
         .education-item h3 {
             font-size: 1.3rem;
-            color: var(--primary);
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
 
         .education-item .degree {
-            color: var(--accent);
+            color: var(--secondary);
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
@@ -290,7 +346,7 @@
         }
 
         .skill-card {
-            background: white;
+            background: var(--white);
             padding: 2rem;
             border-radius: 8px;
             text-align: center;
@@ -299,9 +355,14 @@
             animation: fadeInUp 0.6s ease;
         }
 
+        [data-theme="dark"] .skill-card {
+            background: var(--primary-light);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
         .skill-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.15);
+            box-shadow: 0 8px 20px rgba(5, 150, 105, 0.15);
         }
 
         .skill-icon {
@@ -311,7 +372,7 @@
 
         .skill-card h3 {
             font-size: 1.2rem;
-            color: var(--primary);
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
         }
 
@@ -322,7 +383,7 @@
 
         /* Projects */
         .project-item {
-            background: white;
+            background: var(--white);
             border-radius: 8px;
             overflow: hidden;
             margin-bottom: 2rem;
@@ -333,13 +394,18 @@
             flex-direction: column;
         }
 
+        [data-theme="dark"] .project-item {
+            background: var(--primary-light);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
         .project-item:hover {
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             transform: translateY(-4px);
         }
 
         .project-header {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
             padding: 2rem;
             color: white;
         }
@@ -361,8 +427,8 @@
 
         .status-badge {
             display: inline-block;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success);
+            background: rgba(5, 150, 105, 0.1);
+            color: var(--secondary);
             padding: 0.4rem 0.8rem;
             border-radius: 4px;
             font-size: 0.85rem;
@@ -371,14 +437,19 @@
 
         /* Certifications */
         .cert-item {
-            background: white;
+            background: var(--white);
             padding: 2rem;
             border-radius: 8px;
             margin-bottom: 1.5rem;
-            border-top: 4px solid var(--success);
+            border-top: 4px solid var(--accent);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             animation: fadeInUp 0.6s ease;
+        }
+
+        [data-theme="dark"] .cert-item {
+            background: var(--primary-light);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .cert-item:hover {
@@ -386,22 +457,144 @@
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
         }
 
-        .cert-item h3 {
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+        .cert-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
         }
 
-        .cert-item .issuer {
-            color: var(--accent);
+        .cert-icon {
+            font-size: 2.5rem;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .cert-content h3 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            text-decoration: none;
+        }
+
+        .cert-content .issuer {
+            color: var(--secondary);
             font-weight: 600;
             font-size: 0.95rem;
         }
 
-        .cert-item .date {
+        .cert-content .date {
             color: var(--text-secondary);
             font-size: 0.9rem;
             margin-top: 0.5rem;
+        }
+
+        .cert-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .cert-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+        }
+
+        /* Hackathons */
+        .hackathon-item {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.6s ease;
+        }
+
+        [data-theme="dark"] .hackathon-item {
+            background: var(--primary-light);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hackathon-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .hackathon-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .hackathon-icon {
+            font-size: 2rem;
+        }
+
+        .hackathon-item h3 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .hackathon-item .organization {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .hackathon-item .date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .hackathon-item p {
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+
+        /* Resume Section */
+        .resume-section {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .resume-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .resume-section p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .resume-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .resume-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
         }
 
         /* Contact Section */
@@ -411,12 +604,16 @@
             text-align: center;
         }
 
+        [data-theme="dark"] .contact-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1a1f35 100%);
+        }
+
         .contact-section .section-title {
             color: white;
         }
 
         .contact-section .section-title::after {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            background: linear-gradient(135deg, var(--accent) 0%, #fcd34d 100%);
         }
 
         .contact-links {
@@ -428,7 +625,7 @@
         }
 
         .contact-link {
-            color: var(--accent-light);
+            color: var(--accent);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
@@ -514,14 +711,6 @@
                 font-size: 2rem;
             }
 
-            nav ul {
-                display: none;
-            }
-
-            .project-item {
-                flex-direction: column;
-            }
-
             .cta-buttons {
                 gap: 0.5rem;
             }
@@ -530,21 +719,32 @@
                 padding: 0.6rem 1.2rem;
                 font-size: 0.9rem;
             }
+
+            .cert-header, .hackathon-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <div class="logo">AP</div>
-            <ul>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <div class="logo">AP</div>
+                <div class="nav-controls">
+                    <ul>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#certifications">Certifications</a></li>
+                        <li><a href="#hackathons">Hackathons</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                    <button class="theme-toggle" onclick="toggleDarkMode()">🌙</button>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -552,12 +752,12 @@
     <section class="hero">
         <div class="container">
             <h1>Anumeh Patil</h1>
-            <p class="subtitle">Information Systems Engineering Student | Python Developer | Machine Learning</p>
+            <p class="subtitle">Information Science and Engineering Student | Machine Learning </p>
             
             <div class="hero-meta">
                 <div class="meta-item">
                     <div class="meta-label">Currently</div>
-                    <div class="meta-value">2nd Year ISE</div>
+                    <div class="meta-value">3rd Year ISE</div>
                 </div>
                 <div class="meta-item">
                     <div class="meta-label">Location</div>
@@ -572,7 +772,7 @@
             <div class="cta-buttons">
                 <a href="#contact" class="btn btn-primary">Get in Touch</a>
                 <a href="https://www.linkedin.com/in/anumeh-patil-867b39280/" target="_blank" class="btn btn-secondary">Visit LinkedIn</a>
-                <a href="https://github.com/QuantumRusk/" target="_blank" class="btn btn-secondary">Visit Github</a>
+                <a href="https://github.com/QuantumRusk/" target="_blank" class="btn btn-secondary">Visit GitHub</a>
             </div>
         </div>
     </section>
@@ -584,13 +784,8 @@
             <div style="margin-top: 3rem;">
                 <div class="education-item">
                     <h3>NMIT Bangalore</h3>
-                    <div class="degree">Bachelor of Information Systems Engineering (ISE)</div>
-                    <div class="details">2nd Year | Bangalore, Karnataka</div>
-                </div>
-                <div class="education-item">
-                    <h3>Podar International school.</h3>
-                    <div class="degree">Class 10th- CBSE</div>
-                    <div class="details">Ichalkaranji, Maharashtra</div>
+                    <div class="degree">Bachelor of Information Science and Engineering (ISE)</div>
+                    <div class="details">3rd Year | Bangalore, Karnataka</div>
                 </div>
             </div>
         </div>
@@ -604,7 +799,7 @@
                 <div class="skill-card">
                     <div class="skill-icon">🐍</div>
                     <h3>Python</h3>
-                    <p>Strong foundation in Python programming for backend development and scripting</p>
+                    <p>Strong foundation in Python programming for Machine Learning and scripting</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">⚙️</div>
@@ -644,23 +839,115 @@
         <div class="container">
             <h2 class="section-title">Certifications</h2>
             <div style="margin-top: 3rem;">
+                
+                <!-- Certification 1: Infosys - Data Structures and Algorithm - May 2026 -->
                 <div class="cert-item">
-                    <h3>Oracle Cloud Infrastructure 2025 AI Foundations Associate</h3>
-                    <div class="issuer">Oracle</div>
-                    <div class="date">Issued: October 2025</div>
+                    <div class="cert-header">
+                        <div class="cert-icon">📚</div>
+                        <div class="cert-content">
+                            <h3>Data Structures and Algorithm</h3>
+                            <div class="issuer">Infosys Springboard</div>
+                            <div class="date">Issued: May 2026</div>
+                            <!-- TO ADD GOOGLE DRIVE LINK: Replace "YOUR_GOOGLE_DRIVE_LINK_HERE" with your actual Google Drive link -->
+                            <a href="https://drive.google.com/file/d/1c1HVjZ1MN4zhImQZDQQi01Ha63ORXyGO/view" target="_blank" class="cert-link">View Certificate</a>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Certification 2: Infosys - Software Engineering Fundamental - May 2026 -->
+                <div class="cert-item">
+                    <div class="cert-header">
+                        <div class="cert-icon">💻</div>
+                        <div class="cert-content">
+                            <h3>Software Engineering Fundamental</h3>
+                            <div class="issuer">Infosys Springboard</div>
+                            <div class="date">Issued: May 2026</div>
+                            <!-- TO ADD GOOGLE DRIVE LINK: Replace "YOUR_GOOGLE_DRIVE_LINK_HERE" with your actual Google Drive link -->
+                            <a href="https://drive.google.com/file/d/1LDj9k7-K-x42LwaoLDsZBlpunPpoAl2_/view" target="_blank" class="cert-link">View Certificate</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certification 3: Anthropic - AI Fluency for Students - April 2026 -->
+                <div class="cert-item">
+                    <div class="cert-header">
+                        <div class="cert-icon">🤖</div>
+                        <div class="cert-content">
+                            <h3>AI Fluency for Students</h3>
+                            <div class="issuer">Anthropic</div>
+                            <div class="date">Issued: April 2026</div>
+                            <!-- TO ADD GOOGLE DRIVE LINK: Replace "YOUR_GOOGLE_DRIVE_LINK_HERE" with your actual Google Drive link -->
+                            <a href="https://drive.google.com/file/d/1khqATQEZWaV4YrIxbjrEfxSzFDUOW2FD/view" target="_blank" class="cert-link">View Certificate</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certification 4: Oracle - OCI AI Foundations Associate - October 2025 -->
+                <div class="cert-item">
+                    <div class="cert-header">
+                        <div class="cert-icon">☁️</div>
+                        <div class="cert-content">
+                            <h3>Oracle Cloud Infrastructure 2025 AI Foundations Associate</h3>
+                            <div class="issuer">Oracle</div>
+                            <div class="date">Issued: October 2025</div>
+                            <!-- TO ADD GOOGLE DRIVE LINK: Replace "YOUR_GOOGLE_DRIVE_LINK_HERE" with your actual Google Drive link -->
+                            <a href="https://drive.google.com/file/d/1SqUIEqYI-nHjUt1hNfGFZ2ymLA8mwLeq/view" target="_blank" class="cert-link">View Certificate</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Hobbies -->
-    <section id="hobbies">
+    <!-- Hackathons -->
+    <section id="hackathons">
         <div class="container">
-            <h2 class="section-title">Hobbies</h2>
+            <h2 class="section-title">Hackathons & Events</h2>
             <div style="margin-top: 3rem;">
-                <div class="cert-item">
-                    <h3>Chess,badminton,Listening music,watching english realted content.</h3>
+
+                <!-- Hackathon 1: GDG CodeSprint - March 2026 -->
+                <div class="hackathon-item">
+                    <div class="hackathon-header">
+                        <div class="hackathon-icon">🚀</div>
+                        <div>
+                            <h3>CodeSprint</h3>
+                            <div class="organization">Google Developer Community (GDG)</div>
+                            <div class="date">February 2026</div>
+                        </div>
+                    </div>
+                    <p>Participated in GDG CodeSprint hackathon, competing in innovative coding challenges and developing solutions with industry-standard tools and frameworks.</p>
+                    <!-- TO ADD GOOGLE DRIVE LINK: Replace "YOUR_GOOGLE_DRIVE_LINK_HERE" with your actual Google Drive link -->
+                    <a href="https://drive.google.com/file/d/1FRI7H-pHueyfcYmsN5c9YgcnxNYJj0m3/view?usp=drive_open" target="_blank" class="cert-link">View Details</a>
                 </div>
+
+                <!-- Hackathon 2: GDG TechSprint - January 2026 -->
+                <div class="hackathon-item">
+                    <div class="hackathon-header">
+                        <div class="hackathon-icon">💡</div>
+                        <div>
+                            <h3>TechSprint</h3>
+                            <div class="organization">Google Developer Community (GDG)</div>
+                            <div class="date">January 2026</div>
+                        </div>
+                    </div>
+                    <p>Competed in GDG TechSprint, showcasing technical skills and collaborating with peers on cutting-edge technology solutions.</p>
+                    <!-- TO ADD GOOGLE DRIVE LINK: Replace "YOUR_GOOGLE_DRIVE_LINK_HERE" with your actual Google Drive link -->
+                    <a href="https://drive.google.com/file/d/1odlL7p91ikxziYCet95YAJ6fDPneYPnV/view" target="_blank" class="cert-link">View Details</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section>
+        <div class="container">
+            <div class="resume-section">
+                <h3>📄 Download My Resume(WILL BE SOON AVAILABLE)</h3>
+                <p>Get a detailed overview of my education, experience, and skills</p>
+                <!-- TO ADD GOOGLE DRIVE LINK FOR RESUME: Replace "YOUR_GOOGLE_DRIVE_RESUME_LINK_HERE" with your actual Google Drive link to your resume PDF -->
+                <a href="YOUR_GOOGLE_DRIVE_RESUME_LINK_HERE" target="_blank" class="resume-link">Download Resume</a>
             </div>
         </div>
     </section>
@@ -674,9 +961,12 @@
                 <a href="https://www.linkedin.com/in/anumeh-patil-867b39280/" target="_blank" class="contact-link">
                     <span>🔗</span> LinkedIn
                 </a>
-                <!--a href="mailto:your.email@example.com" class="contact-link">
-                    <span>✉️</span> Email(Dummy-link)
-               </a-->
+                <a href="https://github.com/QuantumRusk/" target="_blank" class="contact-link">
+                    <span>🐙</span> GitHub
+                </a>
+                <a href="mailto:your.email@example.com" class="contact-link">
+                    <span>✉️</span> Email(Not available right now)
+                </a>
             </div>
         </div>
     </section>
@@ -685,5 +975,30 @@
     <footer>
         <p>&copy; 2026 Anumeh Patil. All rights reserved. Made with ❤️</p>
     </footer>
+
+    <script>
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update button icon
+            const button = document.querySelector('.theme-toggle');
+            button.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Check saved theme preference on page load
+        window.addEventListener('load', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            const button = document.querySelector('.theme-toggle');
+            button.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        });
+    </script>
 </body>
 </html>
